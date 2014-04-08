@@ -8,6 +8,7 @@ var bigint = module.exports = function(int, base) {
 };
 
 function BigNum(str, base) {
+  if(typeof str === 'number') str = str.toString()
   this._jsbn = new jsbn(str, base || 10);
 }
 
