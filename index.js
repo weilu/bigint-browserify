@@ -44,6 +44,12 @@ BigNum.prototype = {
   le: function(a) {
     return this.cmp(a) <= 0;
   },
+  abs: function() {
+    return fromJsbn(this._jsbn.abs());
+  },
+  neg: function() {
+    return fromJsbn(this._jsbn.negate());
+  },
   bitLength: function() {
     return this._jsbn.bitLength();
   },

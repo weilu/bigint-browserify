@@ -46,6 +46,22 @@ test('implicit base', function(t) {
 });
 
 
+// operations that does not take arguments
+// also test on negative values
+
+['abs', 'neg'].forEach(function(name) {
+  assertSame(name, function(bigint, cb) {
+    var ba = bigint(a, 16);
+    cb(null, ba[name]().toString(16));
+  });
+
+  assertSame('bigint.' + name, function(bigint, cb) {
+    var ba = bigint(a, 16).neg();
+    cb(null, bigint[name](ba).toString(16));
+  });
+});
+
+
 // comparisons
 
 assertSame('eq', function(bigint, cb) {
