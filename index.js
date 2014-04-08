@@ -21,16 +21,16 @@ function fromJsbn(n) {
 
 BigNum.prototype = {
   powm: function(a, b) {
-    if (!a._jsbn) a = new BigInt(a);
-    if (!b._jsbn) b = new BigInt(b);
+    if (!a._jsbn) a = new BigNum(a);
+    if (!b._jsbn) b = new BigNum(b);
     return fromJsbn(this._jsbn.modPow(a._jsbn, b._jsbn));
   },
   eq: function(a) {
-    if (!a._jsbn) a = new BigInt(a);
+    if (!a._jsbn) a = new BigNum(a);
     return this._jsbn.equals(a._jsbn);
   },
   cmp: function(a) {
-    if (!a._jsbn) a = new BigInt(a);
+    if (!a._jsbn) a = new BigNum(a);
     return this._jsbn.compareTo(a._jsbn);
   },
   gt: function(a) {
