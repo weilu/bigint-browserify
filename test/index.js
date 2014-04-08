@@ -1,6 +1,6 @@
 var test = require("tape");
 
-var bigint = require('bigint');
+var bigint = require('bignum');
 var bigintB = require('../');
 
 var a = 'deadbeefcafe';
@@ -35,14 +35,14 @@ test('implicit base', function(t) {
     var ba = bigint(a, 16);
     var bb = bigint(b, 16);
     var bc = bigint(c, 16);
-    cb(null, ba[name](bb, bc).toString(16));
+    cb(null, ba[name](bb, bc).toBuffer().toString('hex'));
   });
 
   assertSame('bigint.' + name, function(bigint, cb) {
     var ba = bigint(a, 16);
     var bb = bigint(b, 16);
     var bc = bigint(c, 16);
-    cb(null, bigint[name](ba, bb, bc).toString(16));
+    cb(null, bigint[name](ba, bb, bc).toBuffer().toString('hex'));
   });
 });
 
@@ -51,7 +51,7 @@ test('implicit base', function(t) {
 assertSame('pow', function(bigint, cb) {
   var bb = bigint(b, 16);
   var bc = bigint(c, 16);
-  cb(null, bb.pow(bc).toString(16));
+  cb(null, bb.pow(bc).toBuffer().toString('hex'));
 });
 
 // operations that does not take arguments

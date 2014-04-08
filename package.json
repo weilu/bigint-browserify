@@ -1,10 +1,10 @@
 {
-  "name": "bigint-browserify",
-  "version": "0.0.2",
-  "description": "bigint api for browser javascript",
+  "name": "bignum-browserify",
+  "version": "0.0.1",
+  "description": "bignum api for browser javascript",
   "repository": {
     "type": "git",
-    "url": "git@github.com:zaach/bigint-browserify.git"
+    "url": "git@github.com:weilu/bigint-browserify.git"
   },
   "main": "index.js",
   "scripts": {
@@ -18,13 +18,13 @@
     "jsbn",
     "bigint"
   ],
-  "author": "Zach Carter",
+  "author": "Zach Carter, Wei Lu",
   "license": "APL 2.0",
   "dependencies": {
     "jsbn": "0.0.0"
   },
   "devDependencies": {
-    "bigint": "~0.4.2",
-    "tape": "~1.0.4"
+    "tape": "~1.0.4",
+    "bignum": "git+https://github.com/dcousens/node-bignum.git#isbitset"
   }
 }
