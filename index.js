@@ -73,7 +73,9 @@ var binOps = {
   pow: 'pow',
   xor: 'xor',
   and: 'and',
-  xor: 'xor'
+  xor: 'xor',
+  shiftLeft: 'shiftLeft',
+  shiftRight: 'shiftRight'
 };
 
 Object.keys(binOps).forEach(function(op) {
