@@ -51,6 +51,9 @@ BigNum.prototype = {
   neg: function() {
     return fromJsbn(this._jsbn.negate());
   },
+  isbitset: function(i) {
+    return this._jsbn.testBit(i)
+  },
   bitLength: function() {
     return this._jsbn.bitLength();
   },

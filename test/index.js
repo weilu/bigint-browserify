@@ -69,6 +69,14 @@ assertSame('pow', function(bigint, cb) {
   });
 });
 
+// additional method
+
+for(var i=0; i<(a.lenth*4); i++) {
+  assertSame('isbitset', function(bigint, cb) {
+    var ba = bigint(a, 16);
+    cb(null, ba.isbitset(i));
+  });
+}
 
 // comparisons
 
