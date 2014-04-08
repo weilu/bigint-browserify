@@ -45,6 +45,13 @@ test('implicit base', function(t) {
   });
 });
 
+// slow operations: use smaller numbers
+
+assertSame('pow', function(bigint, cb) {
+  var bb = bigint(b, 16);
+  var bc = bigint(c, 16);
+  cb(null, bb.pow(bc).toString(16));
+});
 
 // operations that does not take arguments
 // also test on negative values
