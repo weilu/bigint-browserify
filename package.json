@@ -24,7 +24,7 @@
     "jsbn": "0.0.0"
   },
   "devDependencies": {
-    "tape": "~1.0.4",
-    "bignum": "git+https://github.com/dcousens/node-bignum.git#isbitset"
+    "bignum": "^0.9.1",
+    "tape": "^3.5.0"
   }
 }
