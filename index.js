@@ -8,8 +8,14 @@ var bigint = module.exports = function(int, base) {
 };
 
 function BigNum(str, base) {
-  if(typeof str === 'number') str = str.toString()
-  this._jsbn = new jsbn(str, base || 10);
+  if (str && str._jsbn) {
+    this._jsbn = str._jsbn;
+  } else {
+    if (typeof str === 'number') {
+      str = str.toString();
+    }
+    this._jsbn = new jsbn(str, base || 10);
+  }
 }
 
 function fromJsbn(n) {
@@ -64,6 +70,9 @@ BigNum.prototype = {
   },
   toString: function(base) {
     return this._jsbn.toString(base);
+  },
+  toNumber: function(){
+    return parseInt(this._jsbn.toString());
   }
 };
 
@@ -77,7 +86,6 @@ var binOps = {
   pow: 'pow',
   xor: 'xor',
   and: 'and',
-  xor: 'xor',
   shiftLeft: 'shiftLeft',
   shiftRight: 'shiftRight'
 };

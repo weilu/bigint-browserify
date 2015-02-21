@@ -46,6 +46,13 @@ test('implicit base', function(t) {
   });
 });
 
+
+assertSame('contructor', function(bigint, cb) {
+  var ba = bigint(a, 16);
+  var bb = bigint(ba);
+  cb(null, bb.toString());
+});
+
 // slow operations: use smaller numbers
 
 assertSame('pow', function(bigint, cb) {
@@ -79,7 +86,6 @@ for(var i=0; i<(a.lenth*4); i++) {
 }
 
 // comparisons
-
 assertSame('eq', function(bigint, cb) {
   var ba = bigint(a, 16);
   var bb = bigint(b, 16);
@@ -116,4 +122,9 @@ assertSame('toBuffer', function(bigint, cb) {
 assertSame('fromBuffer', function(bigint, cb) {
   var ba = bigint(a, 16);
   cb(null, bigint.fromBuffer(ba.toBuffer()).toString(16));
+});
+
+assertSame('toString', function(bigint, cb) {
+  var ba = bigint(a, 16);
+  cb(null, ba.toString());
 });
