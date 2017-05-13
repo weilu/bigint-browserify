@@ -29,7 +29,7 @@ test('implicit base', function(t) {
 // operations
 
 ['add', 'sub', 'mul', 'div', 'mod', 'invertm',
-  'xor', 'and', 'powm', 'shiftLeft', 'shiftRight']
+  'xor', 'and', 'or', 'powm', 'shiftLeft', 'shiftRight']
 .forEach(function(name) {
   assertSame(name, function(bigint, cb) {
     var ba = bigint(a, 16);

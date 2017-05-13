@@ -90,6 +90,7 @@ var binOps = {
   pow: 'pow',
   xor: 'xor',
   and: 'and',
+  or: 'or',
   shiftLeft: 'shiftLeft',
   shiftRight: 'shiftRight'
 };
