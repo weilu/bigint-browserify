@@ -92,6 +92,12 @@ assertSame('eq', function(bigint, cb) {
   cb(null, ba.eq(bb) && ba.eq(ba));
 });
 
+assertSame('ne', function(bigint, cb) {
+  var ba = bigint(a, 16);
+  var bb = bigint(b, 16);
+  cb(null, ba.ne(bb) && ba.ne(ba));
+});
+
 ['cmp', 'gt', 'ge', 'lt', 'le']
 .forEach(function(name) {
   assertSame(name, function(bigint, cb) {

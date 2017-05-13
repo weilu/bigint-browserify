@@ -35,6 +35,10 @@ BigNum.prototype = {
     if (!a._jsbn) a = new BigNum(a);
     return this._jsbn.equals(a._jsbn);
   },
+  ne: function(a) {
+    if (!a._jsbn) a = new BigNum(a);
+    return !this._jsbn.equals(a._jsbn);
+  },
   cmp: function(a) {
     if (!a._jsbn) a = new BigNum(a);
     return this._jsbn.compareTo(a._jsbn);
