@@ -24,7 +24,7 @@
     "jsbn": "0.0.0"
   },
   "devDependencies": {
-    "bignum": "^0.9.1",
+    "bignum": "^0.12.5",
     "tape": "^3.5.0"
   }
 }
