@@ -14,6 +14,25 @@ function BigNum(str, base) {
     if (typeof str === 'number') {
       str = str.toString();
     }
+
+    if (str.match(/e\+/)) { // positive exponent
+      if (!Number(str).toString().match(/e+/)) {
+        str = Math.floor(Number(str)).toString();
+      } else {
+        var pow = Math.ceil(Math.log(str) / Math.log(2))
+        var n = (str / Math.pow(2, pow)).toString(2)
+          .replace(/^0/, '')
+        var i = n.length - n.indexOf('.')
+        n = n.replace(/\./, '')
+
+        for (; i <= pow; i++) n += '0'
+        str = n;
+        base = 2;
+      }
+    } else if (str.match(/e\-/)) { // negative exponent
+      str = Math.floor(Number(str)).toString();
+    }
+
     this._jsbn = new jsbn(str, base || 10);
   }
 }
