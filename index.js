@@ -31,6 +31,13 @@ BigNum.prototype = {
     if (!b._jsbn) b = new BigNum(b);
     return fromJsbn(this._jsbn.modPow(a._jsbn, b._jsbn));
   },
+  pow: function(a) {
+    if (this._jsbn.equals(jsbn.ZERO)) {
+      return fromJsbn(jsbn.ZERO);
+    }
+    if (!a._jsbn) a = new BigNum(a);
+    return fromJsbn(this._jsbn.pow(a._jsbn));
+  },
   eq: function(a) {
     if (!a._jsbn) a = new BigNum(a);
     return this._jsbn.equals(a._jsbn);
@@ -87,7 +94,6 @@ var binOps = {
   div: 'divide',
   mod: 'mod',
   invertm: 'modInverse',
-  pow: 'pow',
   xor: 'xor',
   and: 'and',
   or: 'or',
