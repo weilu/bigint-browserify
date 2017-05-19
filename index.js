@@ -103,7 +103,15 @@ BigNum.prototype = {
   },
   toNumber: function(){
     return parseInt(this._jsbn.toString());
-  }
+  },
+  mod: function(a) {
+    if (!a._jsbn) a = new BigNum(a);
+    if (this._jsbn.compareTo(jsbn.ZERO) < 0 && a._jsbn.compareTo(jsbn.ZERO) < 0) {
+      return fromJsbn(this._jsbn.abs().mod(a._jsbn.abs()).negate());
+    } else {
+      return fromJsbn(this._jsbn.mod(a._jsbn));
+    }
+  },
 };
 
 var binOps = {
@@ -111,7 +119,6 @@ var binOps = {
   sub: 'subtract',
   mul: 'multiply',
   div: 'divide',
-  mod: 'mod',
   invertm: 'modInverse',
   xor: 'xor',
   and: 'and',
