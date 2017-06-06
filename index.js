@@ -51,10 +51,10 @@ BigNum.prototype = {
     return fromJsbn(this._jsbn.modPow(a._jsbn, b._jsbn));
   },
   pow: function(a) {
-    if (this._jsbn.equals(jsbn.ZERO)) {
+    if (!a._jsbn) a = new BigNum(a);
+    if (this._jsbn.equals(jsbn.ZERO) && !(a._jsbn.equals(jsbn.ZERO))) {
       return fromJsbn(jsbn.ZERO);
     }
-    if (!a._jsbn) a = new BigNum(a);
     return fromJsbn(this._jsbn.pow(a._jsbn));
   },
   eq: function(a) {
