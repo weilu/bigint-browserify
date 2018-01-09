@@ -48,6 +48,13 @@ BigNum.prototype = {
   powm: function(a, b) {
     if (!a._jsbn) a = new BigNum(a);
     if (!b._jsbn) b = new BigNum(b);
+    if (a._jsbn.compareTo(jsbn.ZERO) < 0) {
+      if (this._jsbn.abs().compareTo(jsbn.ONE) > 0) {
+        return fromJsbn(jsbn.ZERO);
+      } else {
+        return this.pow(a).mod(b);
+      }
+    }
     return fromJsbn(this._jsbn.modPow(a._jsbn, b._jsbn));
   },
   pow: function(a) {
