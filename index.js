@@ -14,6 +14,25 @@ function BigNum(str, base) {
     if (typeof str === 'number') {
       str = str.toString();
     }
+
+    if (str.match(/e\+/)) { // positive exponent
+      if (!Number(str).toString().match(/e+/)) {
+        str = Math.floor(Number(str)).toString();
+      } else {
+        var pow = Math.ceil(Math.log(str) / Math.log(2))
+        var n = (str / Math.pow(2, pow)).toString(2)
+          .replace(/^0/, '')
+        var i = n.length - n.indexOf('.')
+        n = n.replace(/\./, '')
+
+        for (; i <= pow; i++) n += '0'
+        str = n;
+        base = 2;
+      }
+    } else if (str.match(/e\-/)) { // negative exponent
+      str = Math.floor(Number(str)).toString();
+    }
+
     this._jsbn = new jsbn(str, base || 10);
   }
 }
@@ -29,11 +48,29 @@ BigNum.prototype = {
   powm: function(a, b) {
     if (!a._jsbn) a = new BigNum(a);
     if (!b._jsbn) b = new BigNum(b);
+    if (a._jsbn.compareTo(jsbn.ZERO) < 0) {
+      if (this._jsbn.abs().compareTo(jsbn.ONE) > 0) {
+        return fromJsbn(jsbn.ZERO);
+      } else {
+        return this.pow(a).mod(b);
+      }
+    }
     return fromJsbn(this._jsbn.modPow(a._jsbn, b._jsbn));
+  },
+  pow: function(a) {
+    if (!a._jsbn) a = new BigNum(a);
+    if (this._jsbn.equals(jsbn.ZERO) && !(a._jsbn.equals(jsbn.ZERO))) {
+      return fromJsbn(jsbn.ZERO);
+    }
+    return fromJsbn(this._jsbn.pow(a._jsbn));
   },
   eq: function(a) {
     if (!a._jsbn) a = new BigNum(a);
     return this._jsbn.equals(a._jsbn);
+  },
+  ne: function(a) {
+    if (!a._jsbn) a = new BigNum(a);
+    return !this._jsbn.equals(a._jsbn);
   },
   cmp: function(a) {
     if (!a._jsbn) a = new BigNum(a);
@@ -73,7 +110,15 @@ BigNum.prototype = {
   },
   toNumber: function(){
     return parseInt(this._jsbn.toString());
-  }
+  },
+  mod: function(a) {
+    if (!a._jsbn) a = new BigNum(a);
+    if (this._jsbn.compareTo(jsbn.ZERO) < 0 && a._jsbn.compareTo(jsbn.ZERO) < 0) {
+      return fromJsbn(this._jsbn.abs().mod(a._jsbn.abs()).negate());
+    } else {
+      return fromJsbn(this._jsbn.mod(a._jsbn));
+    }
+  },
 };
 
 var binOps = {
@@ -81,11 +126,11 @@ var binOps = {
   sub: 'subtract',
   mul: 'multiply',
   div: 'divide',
-  mod: 'mod',
   invertm: 'modInverse',
-  pow: 'pow',
   xor: 'xor',
   and: 'and',
+  or: 'or',
+  gcd: 'gcd',
   shiftLeft: 'shiftLeft',
   shiftRight: 'shiftRight'
 };

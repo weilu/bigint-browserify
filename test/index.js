@@ -29,7 +29,7 @@ test('implicit base', function(t) {
 // operations
 
 ['add', 'sub', 'mul', 'div', 'mod', 'invertm',
-  'xor', 'and', 'powm', 'shiftLeft', 'shiftRight']
+  'xor', 'and', 'or', 'powm', 'shiftLeft', 'shiftRight']
 .forEach(function(name) {
   assertSame(name, function(bigint, cb) {
     var ba = bigint(a, 16);
@@ -90,6 +90,12 @@ assertSame('eq', function(bigint, cb) {
   var ba = bigint(a, 16);
   var bb = bigint(b, 16);
   cb(null, ba.eq(bb) && ba.eq(ba));
+});
+
+assertSame('ne', function(bigint, cb) {
+  var ba = bigint(a, 16);
+  var bb = bigint(b, 16);
+  cb(null, ba.ne(bb) && ba.ne(ba));
 });
 
 ['cmp', 'gt', 'ge', 'lt', 'le']
